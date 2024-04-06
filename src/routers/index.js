@@ -8,11 +8,13 @@ const routes = [
     path: "/",
     name: "Home",
     component: HomeLayout,
+    props: true,
   },
   {
     path: "/add",
     name: "add",
     component: AddFormLayout,
+    props: true,
   },
 ];
 
