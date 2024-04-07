@@ -23,12 +23,18 @@
         >
           <th
             scope="row"
-            class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            class="px-6 py-3 font-medium whitespace-nowrap"
+            :class="{
+              'line-through decoration-red-500 text-red-500': todo.completed,
+            }"
           >
             {{ indexPaging + index }}
           </th>
 
-          <td class="px-6 py-3 text-center">
+          <td
+            class="px-6 py-3 text-center"
+            :class="{ 'line-through decoration-red-500': todo.completed }"
+          >
             <span> {{ todo.userId }}</span>
           </td>
           <td class="px-6 py-3">

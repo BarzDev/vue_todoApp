@@ -16,7 +16,7 @@
     </svg>
   </div>
 
-  <button v-else class="text-red-600">
+  <button v-else class="text-red-600" @click="onDelete">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -38,5 +38,17 @@
 export default {
   name: "DeleteButton",
   props: ["todo"],
+
+  methods: {
+    onDelete() {
+      const confirmed = window.confirm(
+        "Are you sure you want to Delete this todo?"
+      );
+      if (confirmed) {
+        alert("Tode Deleted");
+        this.$store.dispatch("deleteTodoAction", this.todo.id);
+      }
+    },
+  },
 };
 </script>

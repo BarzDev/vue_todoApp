@@ -23,6 +23,13 @@ export default createStore({
         state.todos.splice(index, 1, updatedTodo);
       }
     },
+
+    deleteTodo(state, todoId) {
+      const index = state.todos.findIndex((todo) => todo.id === todoId);
+      if (index !== -1) {
+        state.todos.splice(index, 1);
+      }
+    },
   },
   actions: {
     addTodoAction({ commit }, newTodo) {
@@ -31,6 +38,10 @@ export default createStore({
 
     editTodoAction({ commit }, updatedTodo) {
       commit("editTodo", updatedTodo);
+    },
+
+    deleteTodoAction({ commit }, todoId) {
+      commit("deleteTodo", todoId);
     },
   },
 

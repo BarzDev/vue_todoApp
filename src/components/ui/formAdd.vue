@@ -12,7 +12,7 @@
         name="userId"
         id="userId"
         class="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-        placeholder=" "
+        placeholder=""
         required
       />
       <label
@@ -29,7 +29,7 @@
         name="title"
         id="title"
         class="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-        placeholder=" "
+        placeholder=""
         required
       />
       <label
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import router from "@/routers";
 
@@ -70,14 +70,21 @@ export default {
     const title = ref("");
     const store = useStore();
 
+    const todosLength = computed(() => store.getters.todos.length);
+
     function onReset() {
       userId.value = "";
       title.value = "";
     }
 
     function onSave() {
+      if (userId.value === "" || title.value === "") {
+        alert("Please fill in the form");
+        return;
+      }
+
       const newTodo = {
-        id: Date.now(),
+        id: todosLength.value + 1,
         userId: userId.value,
         title: title.value,
         completed: false,

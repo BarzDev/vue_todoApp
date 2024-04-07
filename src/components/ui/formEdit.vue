@@ -73,6 +73,10 @@ export default {
     const store = useStore();
 
     function onSave() {
+      if (userId.value === "" || title.value === "") {
+        alert("Please fill in the form");
+        return;
+      }
       const editTodo = {
         id: props.todo.id,
         userId: userId.value,
@@ -84,8 +88,6 @@ export default {
         "Are you sure you want to edit this todo?"
       );
       if (confirmed) {
-        // Jika pengguna menekan OK
-        // console.log(editTodo);
         store.dispatch("editTodoAction", editTodo);
         alert("Todo Edited Successfully");
         router.push("/");
