@@ -1,7 +1,7 @@
 <template>
-  <main class="bg-slate-200 h-screen overflow-y-hidden">
+  <main class="bg-slate-200 min-h-screen">
     <NavbarComponent />
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto p-4">
       <RouterView :todos="todos" />
     </div>
   </main>

@@ -1,5 +1,5 @@
 <template>
-  <button>
+  <button class="text-red-600">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -19,6 +19,6 @@
 
 <script>
 export default {
-  name: "DeleteComponent",
+  name: "DeleteButton",
 };
 </script>

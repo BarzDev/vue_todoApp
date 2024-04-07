@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeLayout from "../components/layouts/Home.vue";
 
 import AddFormLayout from "../components/layouts/AddForm.vue";
+import EditFormLayout from "../components/layouts/EditForm.vue";
 
 const routes = [
   {
@@ -14,6 +15,12 @@ const routes = [
     path: "/add",
     name: "add",
     component: AddFormLayout,
+    props: true,
+  },
+  {
+    path: "/edit/",
+    name: "edit",
+    component: EditFormLayout,
     props: true,
   },
 ];
