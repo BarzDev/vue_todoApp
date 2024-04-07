@@ -1,5 +1,3 @@
-// store/index.js
-
 import { createStore } from "vuex";
 
 export default createStore({
@@ -31,6 +29,7 @@ export default createStore({
       }
     },
   },
+
   actions: {
     addTodoAction({ commit }, newTodo) {
       commit("addTodo", newTodo);

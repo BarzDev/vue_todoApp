@@ -33,7 +33,10 @@
 
           <td
             class="px-6 py-3 text-center"
-            :class="{ 'line-through decoration-red-500': todo.completed }"
+            :class="{
+              'line-through decoration-slate-600 text-slate-600 ':
+                todo.completed,
+            }"
           >
             <span> {{ todo.userId }}</span>
           </td>
