@@ -12,11 +12,11 @@
 <script>
 import Table from "../ui/table.vue";
 import Pagination from "../ui/pagination.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "HomeLayout",
   components: { Table, Pagination },
-  props: ["todos"],
 
   data() {
     return {
@@ -26,6 +26,8 @@ export default {
   },
 
   computed: {
+    ...mapGetters(["todos"]),
+
     totalPages() {
       return Math.ceil(this.todos.length / this.itemsPerPage);
     },

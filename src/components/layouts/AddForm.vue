@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import FormComponent from "../ui/form.vue";
+import FormComponent from "../ui/formAdd.vue";
 
 export default {
   name: "AddFormLayout",

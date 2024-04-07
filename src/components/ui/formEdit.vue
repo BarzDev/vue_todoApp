@@ -1,7 +1,7 @@
 <template>
-  <form class="max-w-lg mx-auto bg-slate-900 p-5 rounded-lg">
+  <div class="max-w-lg mx-auto bg-slate-900 p-5 rounded-lg">
     <div class="flex items-center justify-center pb-10">
-      <p class="font-bold text-xl text-white">Create New Todo Item</p>
+      <p class="font-bold text-xl text-white">Edit Todo Item</p>
     </div>
 
     <div class="relative z-0 w-full mb-5 group">
@@ -40,40 +40,61 @@
     </div>
 
     <div class="flex items-center justify-end gap-3">
-      <button
-        @click="onReset"
-        class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+      <RouterLink
+        to="/"
+        class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800"
       >
-        Reset
-      </button>
+        Back
+      </RouterLink>
 
       <button
-        type="submit"
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        @click="onSave"
+        class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
       >
-        Save
+        Edit
       </button>
     </div>
-  </form>
+  </div>
 </template>
 
 <script>
+import router from "@/routers";
 import { ref } from "vue";
+import { RouterLink } from "vue-router";
+import { useStore } from "vuex";
 export default {
-  name: "FormComponent",
-  setup() {
-    const userId = ref("");
-    const title = ref("");
+  name: "FormEdit",
+  components: { RouterLink },
+  props: ["todo"],
 
-    function onReset() {
-      userId.value = "";
-      title.value = "";
+  setup(props) {
+    const userId = ref(props.todo.userId);
+    const title = ref(props.todo.title);
+    const store = useStore();
+
+    function onSave() {
+      const editTodo = {
+        id: props.todo.id,
+        userId: userId.value,
+        title: title.value,
+        completed: props.todo.completed,
+      };
+
+      const confirmed = window.confirm(
+        "Are you sure you want to edit this todo?"
+      );
+      if (confirmed) {
+        // Jika pengguna menekan OK
+        // console.log(editTodo);
+        store.dispatch("editTodoAction", editTodo);
+        alert("Todo Edited Successfully");
+        router.push("/");
+      }
     }
-
     return {
       userId,
       title,
-      onReset,
+      onSave,
     };
   },
 };

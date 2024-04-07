@@ -18,7 +18,7 @@ const routes = [
     props: true,
   },
   {
-    path: "/edit/",
+    path: "/edit/:id",
     name: "edit",
     component: EditFormLayout,
     props: true,
