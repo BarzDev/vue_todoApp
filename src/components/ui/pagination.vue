@@ -1,5 +1,15 @@
 <template>
-  <div class="flex flex-col items-center">
+  <div class="flex items-center justify-between">
+    <!-- Help text -->
+    <span class="text-sm">
+      Showing
+      <span class="font-semibold text-red-500">{{ currentPage * 10 - 9 }}</span>
+      to
+      <span class="font-semibold text-red-500">{{ currentPage * 10 }}</span> of
+      <span class="font-semibold text-red-500">{{ dataLength }}</span>
+      Entries
+    </span>
+    <div class="inline-flex mt-2 xs:mt-0"></div>
     <div class="inline-flex mt-2 xs:mt-0">
       <button
         @click="changePage(currentPage - 1)"
@@ -58,6 +68,10 @@ export default {
       required: true,
     },
     currentPage: {
+      type: Number,
+      required: true,
+    },
+    dataLength: {
       type: Number,
       required: true,
     },

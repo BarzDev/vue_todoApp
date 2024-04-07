@@ -1,9 +1,10 @@
 <template>
   <div>
-    <Table :todos="displayedTodos" />
+    <Table :todos="displayedTodos" :currentPage="currentPage" />
     <Pagination
       :totalPages="totalPages"
       :currentPage="currentPage"
+      :dataLength="dataLength"
       @changePage="changePage"
     />
   </div>
@@ -27,6 +28,10 @@ export default {
 
   computed: {
     ...mapGetters(["todos"]),
+
+    dataLength() {
+      return this.todos.length;
+    },
 
     totalPages() {
       return Math.ceil(this.todos.length / this.itemsPerPage);

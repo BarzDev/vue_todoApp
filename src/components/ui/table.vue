@@ -7,6 +7,7 @@
         class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
       >
         <tr class="text-center">
+          <th scope="col" class="px-6 py-3 font-bold text-left">No.</th>
           <th scope="col" class="px-6 py-3">User ID</th>
           <th scope="col" class="px-6 py-3">Title Todo</th>
           <th scope="col" class="px-6 py-3">Status</th>
@@ -16,7 +17,7 @@
       </thead>
       <tbody>
         <tr
-          v-for="todo in todos"
+          v-for="(todo, index) in todos"
           :key="todo.id"
           class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
         >
@@ -24,9 +25,12 @@
             scope="row"
             class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
           >
-            {{ todo.userId }}
+            {{ indexPaging + index }}
           </th>
 
+          <td class="px-6 py-3 text-center">
+            <span> {{ todo.userId }}</span>
+          </td>
           <td class="px-6 py-3">
             <span :class="{ done: todo.completed }"> {{ todo.title }}</span>
           </td>
@@ -89,12 +93,27 @@
 </template>
 
 <script>
+import { ref, watch } from "vue";
 import DeleteButton from "./deleteButton.vue";
 
 export default {
   name: "TableComponent",
   components: { DeleteButton },
-  props: ["todos"],
+  props: ["todos", "currentPage"],
+
+  setup(props) {
+    const indexPaging = ref(props.currentPage);
+    watch(
+      () => props.currentPage,
+      (newValue) => {
+        indexPaging.value = newValue * 10 - 9;
+      }
+    );
+
+    return {
+      indexPaging,
+    };
+  },
 };
 </script>
 
